@@ -16,6 +16,8 @@ require Rails.root.join("lib", "rails_admin", "multi_deactive_question.rb")
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::MultiDeactiveQuestion)
 require Rails.root.join("lib", "rails_admin", "dashboard.rb")
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Dashboard)
+require Rails.root.join("lib", "rails_admin", "import.rb")
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Import)
 
 RailsAdmin::ApplicationHelper.class_eval do
   def menu_for(parent, abstract_model = nil, object = nil, only_icon = false) # perf matters here (no action view trickery)
@@ -62,9 +64,12 @@ RailsAdmin.config do |config|
 
   config.current_user_method(&:current_user)
   config.authorize_with :cancan
-  config.main_app_name = ["Framgia Test System", "Admin"]
+  config.main_app_name = ["Sun-asterisk Test System", "Admin"]
 
   config.actions do
+    import do
+      only Question
+    end
     dashboard
     index
     create_question do

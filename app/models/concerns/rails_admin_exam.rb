@@ -31,15 +31,15 @@ module RailsAdminExam
       end
 
       list do
-        filters [:user_id, :subject_id]
-        sort_by :created_at
+        # filters [:user_id, :subject_id]
+        # sort_by :created_at
 
-        field :user_id, :enum do
-          enum do
-            User.all.collect {|p| [p.name, p.id]}
-          end
-          hide
-        end
+        # field :user_id, :enum do
+        #   enum do
+        #     User.all.collect {|p| [p.name, p.id]}
+        #   end
+        #   hide
+        # end
         field :subject_id, :enum do
           enum do
             Subject.all.collect {|p| [p.name, p.id]}

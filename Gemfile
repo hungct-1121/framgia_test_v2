@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby '2.3.1'
+
 gem "bootstrap-kaminari-views"
 gem "bootstrap-sass"
 gem "cancancan"
@@ -20,9 +22,12 @@ gem "settingslogic"
 gem "turbolinks"
 gem "twitter-bootstrap-rails", ">= 2.0.3"
 gem "uglifier", ">= 1.3.0"
+gem "roo"
+gem "roo-xls"
 
 group :production do
-  gem "unicorn"
+  # gem "unicorn"
+  gem "puma"
 end
 
 group :development, :test do

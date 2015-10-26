@@ -53,5 +53,38 @@ class Question < ActiveRecord::Base
       end.to_json
     end
   end
-end
 
+  def self.import_csv file, user
+    begin
+      data_file = Roo::Excelx.new file.path
+
+      # Read subject data
+      subject_data = data_file.sheet "Subject"
+      subject_data.header_line = 2
+      sdata = subject_data.parse(headers: true).first
+      raise ActiveRecord::RecordNotSaved unless sdata
+      subject = Subject.find_or_initialize_by name: sdata["name"]
+      subject.assign_attributes number_of_question: sdata["number_of_question"].to_i,
+                                duration: sdata["duration"].to_i
+      subject.save
+
+      # Read question data
+      question_data = data_file.sheet "Question"
+      question_data.header_line = 2
+
+      last_question = nil
+      ActiveRecord::Base.transaction do
+        question_data.parse(headers: true).each do |data|
+          if data["mark"].present?
+            last_question = subject.questions.create content: data["content"], state: data["state"], active: true,
+              question_type: data["question_type"], user_id: user.id
+          elsif last_question.is_a?(Question) && last_question.persisted?
+            last_question.options.create content: data["content"], correct: data["correct"].present?
+          end
+        end
+      end
+    rescue StandardError => e
+      raise e
+    end
+  end
+end

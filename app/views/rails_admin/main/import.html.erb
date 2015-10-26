@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="row">
+    <h3 class="text-success text-center"><%= t "messages.chooseCsvFile" %></h3>
+    <div class="col-md-4 col-md-offset-4">
+      <%= form_tag import_path, method: :post, multipart: true do %>
+        <div class="col-md-11">
+          <div class="form-group">
+            <%= file_field_tag :file, class: "filestyle", required: true %>
+          </div>
+          <div class="form-group">
+            <%= submit_tag t("submit"), class: "btn btn-success pull-right" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= t "template_file" %>
+      <%= link_to Settings.template_file_url, Settings.template_file_url, target: :_blank %>
+    </div>
+  </div>
+</div>

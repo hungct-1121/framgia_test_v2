@@ -21,7 +21,7 @@
 
 en:
   titles:
-    header: "Framgia Testing System"
+    header: "Sun-asterisk Testing System"
     most_failed_questions: "Most failed questions"
     series_name: "Correct"
     yAxis_title: "Times"
@@ -64,3 +64,16 @@ en:
   chatwork_id: "ChatworkID"
   name: "Name"
   email: "Email"
+  admin:
+    actions:
+      import:
+        breadcrumb: "Import"
+        menu: "Import"
+        title: "Import successfully"
+  submit: "Submit"
+  template_file: "Template file: "
+  messages:
+    chooseCsvFile: "Choose csv with format as picture below"
+    csv:
+      import_success: "Import successfully"
+      import_failed: "Import failed"

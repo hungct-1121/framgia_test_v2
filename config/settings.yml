@@ -21,6 +21,8 @@ defaults: &defaults
   default_num_of_most_failed_question: 5
   min_num_of_most_failed_question: 2
   max_num_of_most_failed_question: 20
+  questions_csv_template_name: "questions_csv_template" 
+  template_file_url: "https://docs.google.com/spreadsheets/d/1ccbwzGIPjz2jCDMyPFAlib4MCN7zdwalIZDse6N1dOI"
 
 development:
   <<: *defaults
