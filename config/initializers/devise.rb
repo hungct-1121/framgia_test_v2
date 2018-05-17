@@ -238,7 +238,28 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  if Rails.env.production?
+    config.omniauth :framgia, ENV["FTS_APP_ID"], ENV["FTS_APP_SECRET"],
+      client_options: {
+        site: "http://10.0.1.14/",
+        authorize_url: "https://wsm.framgia.vn/authorize",
+        token_url: "http://10.0.1.14/auth/access_token"
+      }
+  elsif Rails.env.staging?
+    config.omniauth :framgia, ENV["FTS_APP_ID_EDEV"], ENV["FTS_APP_SECRET_EDEV"],
+      client_options: {
+        site: "http://172.16.0.18/",
+        authorize_url: "http://edev.framgia.vn/authorize",
+        token_url: "http://172.16.0.18/auth/access_token"
+      }
+  else
+    config.omniauth :framgia, ENV["FTS_APP_ID_EDEV"], ENV["FTS_APP_SECRET_EDEV"],
+      client_options: {
+        site: "http://edev.framgia.vn",
+        authorize_url: "http://edev.framgia.vn/authorize",
+        token_url: "http://edev.framgia.vn/auth/access_token"
+      }
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
